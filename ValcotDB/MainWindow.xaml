@@ -1,0 +1,172 @@
+﻿<Window x:Class="ValcotDB.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ValcotDB"
+        mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+     WindowState="Normal" WindowStyle="None" Loaded="Window_Loaded"
+    Title="MainWindow" Height="680" Width="1273" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Storyboard x:Key="menuCollapse">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="gridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="120"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0:1" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="menuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="gridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0:1" Value="120"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnCollapseMenu">
+            <BeginStoryboard Storyboard="{StaticResource menuCollapse}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource menuOpen}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid Background="#FFFFEBC3">
+
+        <Grid x:Name="gridMain" Width="Auto" Height="Auto" Background="#FFFFEBC3" Margin="0,125,125,0">
+            <Image Source="/Imagenes/ValcotWines.PNG" Height="auto" Width="auto" Margin="-10,-22,-20,-22"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,276">
+
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,274,0,0" HorizontalAlignment="Right" Width="1143">
+
+            </StackPanel>
+        </Grid>
+        <Grid  Height = "120" VerticalAlignment="Top" Background="#2E2A25" Margin="0,0,0,400">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,68,0,0">
+                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="White">
+                    <StackPanel Width="180">
+                        <Button Content="Cambiar tu contraseña" x:Name="btnChangePassword" Click="btnChangePassword_Click"/>
+                        <Button Content="Olvido de Contraseña" x:Name="btnOlvidoPassword" Click="btnOlvidoPassword_Click"/>
+                        <Button Content="Ayuda"/>
+                        <Button x:Name="btnAcercaDe" Content="Acerca de..." Click="btnAcercaDe_Click"/>
+                        <Separator/>
+                        <Button x:Name="btnSalir" Content="Salir" Click="btnSalir_Click"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+                <TextBlock x:Name="txtUserInfo" Text="Usuario : admin" Foreground="White" VerticalAlignment="Center" Margin="5"/>
+            </StackPanel>
+        </Grid>
+        <Grid Height = "70" VerticalAlignment="Top" Background="#E3E1DD">
+            <StackPanel Margin=" 600 10 10 10" Orientation="Horizontal">
+            </StackPanel>
+            <ListView x:Name="lvwMenu" Margin="0,10,573,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lvwMenu_SelectionChanged"  HorizontalAlignment="Right" Width="93">
+                <ListViewItem x:Name="itemHome" Height="60" Width="93" HorizontalAlignment="Right">
+                    <StackPanel  Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Home" Width="25" Height="25" Foreground="Black" VerticalAlignment="Center"></materialDesign:PackIcon>
+                        <TextBlock Text="Inicio" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Margin="10 0 0 0"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <ListView x:Name="lvwCliente" Margin="0,10,456,-8" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lvwCliente_SelectionChanged"  HorizontalAlignment="Right" Width="108">
+                <ListViewItem x:Name="itemClient" Height="60" Width="110" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Width="96">
+                        <materialDesign:PackIcon Kind="UserBadge" Width="25" Height="25" Foreground="Black" VerticalAlignment="Center"></materialDesign:PackIcon>
+                        <TextBlock Text="Clientes" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp_1" Margin="10 0 0 0"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <ListView x:Name="lvwStock" Margin="797,10,381,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lvwStock_SelectionChanged" HorizontalAlignment="Right" Width="93">
+                <ListViewItem  x:Name="itemStock" Height="60" Foreground="Black" Width="98" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="BottleWine" Width="31" Height="25" Foreground="Black" VerticalAlignment="Center"></materialDesign:PackIcon>
+                        <TextBlock Text="Stock" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Margin="10 0 0 0"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <ListView x:Name="lvwTransacciones" Margin="0,10,227,0" SelectionChanged="lvwTransacciones_SelectionChanged"   ScrollViewer.HorizontalScrollBarVisibility="Disabled"  HorizontalAlignment="Right" Width="149">
+                <ListViewItem x:Name="itemTransacciones" Height="60" Foreground="Black" Width="164" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Money" Width="25" Height="25" Foreground="Black" VerticalAlignment="Center"></materialDesign:PackIcon>
+                        <TextBlock Text="Transacciones" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Margin="10 0 0 0"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <ListView x:Name="lvwUsuarios" Margin="0,10,77,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lvwUsuarios_SelectionChanged"  HorizontalAlignment="Right" Width="119">
+                <ListViewItem x:Name="itemUsuarios" Height="60" Foreground="Black" Width="131">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="User" Width="25" Height="25" Foreground="Black" VerticalAlignment="Center"></materialDesign:PackIcon>
+                        <TextBlock Text="Usuario" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Margin="10 0 0 0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <Grid HorizontalAlignment="Left" Margin="0,0,0,-8" Width="288" >
+                <Image Source="/Imagenes/VALCOTSOLOLETRAS.png" Stretch="Fill" HorizontalAlignment="Left" Margin="0,0,0,-14.778" Width="259"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="gridMenu" Width="125" HorizontalAlignment="Right" Background="#2E2A25" Margin="0,120,0,0">
+            <StackPanel>
+                <Grid Height="136">
+                    <Button x:Name="btnCollapseMenu" Width="60" Height="33" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnCollapseMenu_Click" >
+                        <materialDesign:PackIcon Kind="ArrowRight" Width="25" Height="25" Foreground="Black"></materialDesign:PackIcon>
+                    </Button>
+
+                    <Button x:Name="btnOpenMenu" Width="60" Height="60" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Collapsed" Click="btnOpenMenu_Click">
+                        <materialDesign:PackIcon Kind="Menu" Width="25" Height="25" Foreground="Black"></materialDesign:PackIcon>
+                    </Button>
+                    <Image x:Name="imgValcot" Source="/imagenes/VALCO.ico" Margin="0,33,0,10" />
+                </Grid>
+            </StackPanel>
+            <ListView x:Name="lvwMenu2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lvwMenu2_SelectionChanged"  Margin="0,127,52,361">
+                <ListViewItem x:Name="itemA">
+                    <Button x:Name="btnTiendas" Click="btnTiendas_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="53" Background="#FF4F17B4" BorderBrush="#FF2B0869" Height="52">
+                        <materialDesign:PackIcon Kind="ShoppingCart" Width="25" Height="25" Foreground="White" VerticalAlignment="Center"></materialDesign:PackIcon>
+                    </Button>
+                </ListViewItem>
+            </ListView>
+            <ListView  x:Name="lvwMenuC" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,180,52,231" SelectionChanged="lvwMenuC_SelectionChanged">
+                <ListViewItem x:Name="itemC">
+                    <Button Click="btnRedirigir_Click"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="53" Height="118" Background="#FF027111" BorderBrush="#FF014204">
+                        <materialDesign:PackIcon Kind="Planet" Width="22" Height="25" Foreground="White" VerticalAlignment="Center"></materialDesign:PackIcon>
+                    </Button>
+                </ListViewItem>
+            </ListView>
+            <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="54,127,0,354">
+                <ListViewItem x:Name="itemB" >
+                    <Button Content="B" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Height="51" RenderTransformOrigin="1.113,0.299" BorderBrush="#FF2B0869" Background="#FF4F17B4"/>
+                </ListViewItem>
+            </ListView>
+            <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="54,180,0,293">
+                <ListViewItem x:Name="itemD">
+                    <Button Content="D" x:Name="btnReports" Click="btnReports_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Height="61" Background="#FF006B05" BorderBrush="#FF012D03"/>
+                </ListViewItem>
+            </ListView>
+            <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="54,242,0,241">
+                <ListViewItem x:Name="itemE" Width="69" Height="72" RenderTransformOrigin="0.5,0.5">
+                    <ListViewItem.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.239"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="0.162"/>
+                        </TransformGroup>
+                    </ListViewItem.RenderTransform>
+                    <Button Click="Button_Click_1"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="59" Height="56" Background="#FF006B05" BorderBrush="#FF002602">
+                        <materialDesign:PackIcon Kind="BottleCokeClassic" Width="25" Height="25" Foreground="White" VerticalAlignment="Center"></materialDesign:PackIcon>
+                    </Button>
+                </ListViewItem>
+            </ListView>
+        </Grid>
+    </Grid>
+</Window>

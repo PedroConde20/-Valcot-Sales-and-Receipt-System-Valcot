@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\DAO.Implementation",
+    "\\DAO.Model",
+    "\\ValcotDB",
+    "\\ValcotDB\\Transacciones",
+    "\\ValcotDB\\Users",
+    "\\ValcotDB\\Usuarios"
+  ],
+  "PreviewInSolutionExplorer": false
+}
